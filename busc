@@ -1,1 +1,528 @@
-iustitia-buscador.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iustitia.ar — Newsletter Contable · Edición de prueba · 29 de junio de 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #EBF0F0; color: #0A1F1F; }
+  .wrapper { max-width: 680px; margin: 0 auto; background: #F5FAFA; }
+  .header { background: #0F2E2E; padding: 28px 36px 22px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .brand { font-family: Georgia, serif; font-size: 22px; font-weight: bold; color: #F5FAFA; letter-spacing: 0.03em; }
+  .brand span { color: #4ABFA8; }
+  .edition-badge { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; background: rgba(74,191,168,0.15); border: 1px solid rgba(74,191,168,0.35); color: #4ABFA8; padding: 4px 10px; border-radius: 3px; }
+  .header-divider { height: 1px; background: rgba(74,191,168,0.2); margin: 14px 0; }
+  .header-meta { font-family: Arial, sans-serif; font-size: 11px; color: rgba(245,250,250,0.45); letter-spacing: 0.06em; }
+  .test-strip { background: #8B1A1A; padding: 7px 36px; font-family: Arial, sans-serif; font-size: 10px; color: #FAF7F2; letter-spacing: 0.05em; text-align: center; }
+  .index-bar { background: #163838; padding: 14px 36px; border-bottom: 2px solid #4ABFA8; }
+  .index-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(74,191,168,0.6); margin-bottom: 8px; }
+  .index-items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .index-item { font-family: Arial, sans-serif; font-size: 10px; color: rgba(245,250,250,0.6); padding: 3px 8px; border: 1px solid rgba(74,191,168,0.18); border-radius: 3px; }
+  .body { padding: 0 36px 36px; }
+  .section-head { margin-top: 32px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #0F2E2E; display: flex; align-items: baseline; gap: 10px; }
+  .section-num { font-family: Georgia, serif; font-size: 28px; font-weight: bold; color: #4ABFA8; line-height: 1; }
+  .section-title { font-family: Georgia, serif; font-size: 16px; font-weight: bold; color: #0F2E2E; }
+  .section-sub { font-family: Arial, sans-serif; font-size: 11px; color: #6A8A85; margin-top: -10px; margin-bottom: 16px; font-style: italic; }
+  .item { margin-bottom: 24px; border: 1px solid #C8DDD8; border-radius: 6px; overflow: hidden; }
+  .item-head { padding: 12px 16px 10px; background: #E8F5F2; border-bottom: 1px solid #C8DDD8; }
+  .item-badges { display: flex; gap: 5px; margin-bottom: 6px; flex-wrap: wrap; }
+  .badge { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; }
+  .badge-norm { background: #0F2E2E; color: #4ABFA8; }
+  .badge-urgente { background: #8B1A1A; color: #FAF7F2; }
+  .badge-plazo { background: #B06000; color: #FFFBF0; }
+  .badge-src { background: #C8DDD8; color: #4A6060; border: 1px solid #B0CDCA; }
+  .item-title { font-family: Georgia, serif; font-size: 14px; font-weight: bold; color: #0F2E2E; line-height: 1.3; }
+  .item-body { padding: 14px 16px; background: #F5FAFA; }
+  .item-summary { font-size: 13.5px; line-height: 1.72; color: #1A2E2E; margin-bottom: 12px; }
+  .item-summary strong { font-weight: bold; color: #0A1F1F; }
+  .alert-box { border-left: 3px solid #4ABFA8; background: #EAF8F5; padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 10px; }
+  .alert-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: #1A7A6A; margin-bottom: 6px; }
+  .alert-profiles { font-size: 12.5px; line-height: 1.65; color: #0A3030; }
+  .alert-profiles li { margin-left: 16px; margin-bottom: 3px; }
+  .deadline-box { border-left: 3px solid #B06000; background: #FFF8EE; padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 10px; }
+  .deadline-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: #B06000; margin-bottom: 4px; }
+  .deadline-text { font-family: Arial, sans-serif; font-size: 12px; color: #5A3000; font-weight: bold; }
+  .critical-box { border-left: 3px solid #8B1A1A; background: rgba(139,26,26,0.05); padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 10px; }
+  .critical-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 4px; }
+  .critical-text { font-size: 12.5px; line-height: 1.65; color: #4A1010; }
+  .color-notes { background: #EBF5F2; border-radius: 6px; padding: 16px 18px; margin-top: 8px; }
+  .color-note-item { font-family: Arial, sans-serif; font-size: 11.5px; color: #2A4A45; line-height: 1.9; padding-left: 14px; position: relative; }
+  .color-note-item::before { content: '·'; position: absolute; left: 0; color: #4ABFA8; font-weight: bold; }
+  .item-divider { height: 1px; background: #C8DDD8; margin: 20px 0; }
+  .cta-box { background: #0F2E2E; padding: 20px 24px; border-radius: 6px; margin-top: 30px; text-align: center; }
+  .cta-text { font-family: Georgia, serif; font-size: 14px; color: #F5FAFA; margin-bottom: 12px; line-height: 1.55; }
+  .cta-btn { display: inline-block; background: #4ABFA8; color: #0F2E2E; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 0.08em; padding: 9px 22px; border-radius: 4px; text-decoration: none; }
+  .footer { background: #0F2E2E; padding: 20px 36px; border-top: 1px solid rgba(74,191,168,0.15); }
+  .footer-brand { font-family: Georgia, serif; font-size: 13px; color: rgba(245,250,250,0.6); margin-bottom: 6px; }
+  .footer-brand span { color: #4ABFA8; }
+  .footer-text { font-family: Arial, sans-serif; font-size: 10px; color: rgba(245,250,250,0.3); line-height: 1.7; }
+  .footer-verse { font-family: Georgia, serif; font-style: italic; font-size: 10px; color: rgba(74,191,168,0.25); margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">Iustitia<span>.ar</span></div>
+      <div class="edition-badge">Edición Contable</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-meta">Semana del 23 al 29 de junio de 2026 &nbsp;·&nbsp; Edición de prueba &nbsp;·&nbsp; Para contadores y asesores impositivos</div>
+  </div>
+
+  <div class="index-bar">
+    <div class="index-label">En este número</div>
+    <div class="index-items">
+      <span class="index-item">RG 5866 · Facturación electrónica financiero-aseguradoras</span>
+      <span class="index-item">RG 5869 · Exenciones Impuesto al Cheque</span>
+      <span class="index-item">RG 5868 · Prórroga excepciones Ganancias/IVA importación</span>
+      <span class="index-item">RG 5870 · Suspensión ejecuciones fiscales</span>
+      <span class="index-item">Notas de color</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- SECCIÓN I -->
+    <div class="section-head">
+      <div class="section-num">I</div>
+      <div class="section-title">Novedades ARCA — Facturación y comprobantes</div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-badges">
+          <span class="badge badge-urgente">Urgente</span>
+          <span class="badge badge-plazo">Cronograma escalonado hasta dic. 2026</span>
+          <span class="badge badge-src">RG ARCA 5866/2026 · B.O. 29/06/2026</span>
+        </div>
+        <div class="item-title">Nuevo esquema de facturación electrónica para entidades financieras y de seguros — reemplaza a la RG 5824</div>
+      </div>
+      <div class="item-body">
+        <div class="item-summary">
+          ARCA publicó hoy la <strong>RG 5866/2026</strong>, que reemplaza a la RG 5824 —abrogada antes de entrar en vigencia plena— y establece un cronograma escalonado por sector que se extiende hasta marzo de 2027. Fechas clave confirmadas: <strong>1° de septiembre de 2026</strong>, las compañías de seguros (Ley 20.091) deben emitir comprobantes electrónicos exclusivamente para operaciones con consumidores finales. <strong>1° de octubre de 2026</strong>, las entidades financieras (Ley 21.526) facturan electrónicamente leasing y operaciones de comercio exterior. <strong>1° de diciembre de 2026</strong>, se suman préstamos (con excepción transitoria de descubiertos), operaciones con sujetos no inscriptos o exentos, y administradoras de tarjetas en lo referido a cargos en liquidaciones. Se incorpora también a instituciones educativas privadas (Ley 26.206) al artículo 23. La norma mantiene la Liquidación Electrónica Mensual como alternativa válida y exceptúa a entidades financieras de informar percepciones de las nuevas operaciones hasta el 30/11/2026, pudiendo detallarlas provisoriamente en extractos bancarios tradicionales.
+        </div>
+        <div class="deadline-box">
+          <div class="deadline-label">Cronograma de vigencias</div>
+          <div class="deadline-text">1/07/2026 (deber de emitir comprobantes, operaciones concertadas) · 1/09/2026 (seguros) · 1/10/2026 (financieras: leasing y comercio exterior) · 1/12/2026 (préstamos y tarjetas)</div>
+        </div>
+        <div class="alert-box">
+          <div class="alert-label">Clientes que deben actuar</div>
+          <ul class="alert-profiles">
+            <li>Compañías de seguros — confirmar adecuación de sistemas antes del <strong>1° de septiembre</strong></li>
+            <li>Bancos y entidades financieras con operaciones de <strong>leasing o comercio exterior</strong> — plazo 1° de octubre</li>
+            <li><strong>Colegios privados, prepagas y PSAV</strong> — quedaron expresamente incorporados en el nuevo Anexo I, verificar encuadre específico</li>
+            <li>Administradoras de tarjetas de crédito y sistemas de pago por transferencia (Com. "A" 7153 BCRA) — preparar implementación para diciembre</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-badges">
+          <span class="badge badge-norm">Vigente desde 18/06/2026</span>
+          <span class="badge badge-src">RG ARCA 5869/2026 · responde a Decreto 475/2026</span>
+        </div>
+        <div class="item-title">Nuevas exenciones al Impuesto sobre los Créditos y Débitos en Cuentas Bancarias (Impuesto al Cheque)</div>
+      </div>
+      <div class="item-body">
+        <div class="item-summary">
+          La RG 5869/2026 reglamenta el <strong>Decreto 475/2026</strong> e incorpora a las Resoluciones Generales 2.111 y 3.900 nuevas exenciones y reducciones de alícuota del Impuesto al Cheque. Los beneficiarios son <strong>Prestadores de Servicios de Activos Virtuales (PSAV) inscriptos ante la CNV</strong>, empresas de tarjetas de débito, crédito y compra, y transportadoras de caudales. Se exige inscripción previa en el <strong>Registro de Beneficios Fiscales</strong> (RG 3.900) para acceder a los beneficios. La norma rige para hechos imponibles desde el 18 de junio de 2026, con efecto retroactivo a la fecha del decreto original.
+        </div>
+        <div class="alert-box">
+          <div class="alert-label">Clientes que se benefician</div>
+          <ul class="alert-profiles">
+            <li>Clientes que operen con <strong>PSAV inscriptos en CNV</strong> (exchanges, billeteras cripto reguladas) — verificar inscripción en el Registro de Beneficios Fiscales</li>
+            <li><strong>Empresas de cobranza por cuenta de terceros</strong> y transportadoras de caudales — revisar cuentas alcanzadas</li>
+            <li>Importante: el beneficio no es automático — el cliente debe inscribir sus cuentas en el Registro para acceder a la exención</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-badges">
+          <span class="badge badge-norm">Prórroga vigente</span>
+          <span class="badge badge-src">RG ARCA 5868/2026 · B.O. 29/06/2026</span>
+        </div>
+        <div class="item-title">Prórroga de excepciones en regímenes de percepción de Ganancias e IVA en importaciones — hasta el 31/12/2026</div>
+      </div>
+      <div class="item-body">
+        <div class="item-summary">
+          La RG 5868/2026, publicada hoy, sustituye en los arts. 1° a 4° de la RG 5.490 la fecha "30 de junio de 2026" por "<strong>31 de diciembre de 2026</strong>", extendiendo las excepciones a los regímenes de percepción de Impuesto a las Ganancias y al Valor Agregado en operaciones de importación. La prórroga responde, según los considerandos, a la continuidad de la política económica de la Administración Nacional.
+        </div>
+        <div class="deadline-box">
+          <div class="deadline-label">Nueva fecha de vencimiento</div>
+          <div class="deadline-text">31 de diciembre de 2026 (antes: 30 de junio de 2026)</div>
+        </div>
+        <div class="alert-box">
+          <div class="alert-label">Clientes que se benefician</div>
+          <ul class="alert-profiles">
+            <li>Clientes <strong>importadores</strong> alcanzados por los regímenes de percepción de Ganancias e IVA — la excepción se mantiene 6 meses más</li>
+            <li>Revisar si el cliente había planificado operaciones en función del vencimiento original de junio — ya no es necesario adelantar importaciones por este motivo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-badges">
+          <span class="badge badge-norm">Norma vigente</span>
+          <span class="badge badge-src">RG ARCA 5870/2026 · Ley 27.341 art. 79</span>
+        </div>
+        <div class="item-title">Prórroga de suspensión de ejecuciones fiscales — Régimen de Promoción Industrial Ley 22.021</div>
+      </div>
+      <div class="item-body">
+        <div class="item-summary">
+          La RG 5870/2026 prorroga hasta el <strong>30 de junio de 2027</strong> la suspensión de ejecuciones fiscales para empresas beneficiarias del Régimen de Promoción Industrial de la Ley 22.021, conforme al art. 79 de la Ley 27.341. La medida alcanza a deudas generadas hasta el período fiscal 2015 y busca dar tiempo adicional para la evaluación de solicitudes de condonación mediante el Certificado de Cumplimiento Promocional.
+        </div>
+        <div class="alert-box">
+          <div class="alert-label">Clientes que se benefician</div>
+          <ul class="alert-profiles">
+            <li>Empresas con <strong>beneficios de promoción industrial histórica</strong> (Ley 22.021) y deudas anteriores a 2015 — la suspensión de ejecuciones se extiende un año más</li>
+            <li>Revisar estado del trámite de Certificado de Cumplimiento Promocional de cada cliente alcanzado</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-divider"></div>
+
+    <!-- NOTAS DE COLOR -->
+    <div class="section-head">
+      <div class="section-num">II</div>
+      <div class="section-title">Notas de color</div>
+    </div>
+    <div class="section-sub">Información institucional sin impacto operativo directo — para estar al tanto, no para actuar</div>
+
+    <div class="color-notes">
+      <div class="color-note-item">ARCA autorizó, mediante <strong>Disposición 19/2026</strong>, una subasta pública electrónica de mercaderías en custodia para el 23 de julio de 2026, en colaboración con el Banco de la Ciudad de Buenos Aires, con el objetivo de descongestionar depósitos fiscales.</div>
+      <div class="color-note-item">Mediante <strong>Resolución 87/2026</strong>, ARCA dio de baja a Signify Argentina S.A. del régimen de depósitos fiscales en Retiro, CABA, manteniendo habilitados a Philips Argentina y Fábrica Austral de Productos Electrónicos en el mismo predio.</div>
+      <div class="color-note-item">La <strong>Superintendencia de Riesgos del Trabajo (SRT)</strong> publicó las alícuotas promedio por actividad (CIIU) aplicables entre el 1° de abril de 2026 y el 31 de marzo de 2027, para la determinación de deuda por cuota omitida al Fondo de Garantía.</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <div class="cta-text">
+        ¿Necesitás el análisis de impacto de alguna de estas normas para un cliente específico?<br>Consultá en la plataforma — respuesta el mismo día.
+      </div>
+      <a href="https://iustitia.ar" class="cta-btn">Ir a Iustitia.ar →</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">Iustitia<span>.ar</span> — Edición Contable Semanal</div>
+    <div class="footer-text">
+      Edición de prueba generada el 29/06/2026 con información verificada en Boletín Oficial y fuentes primarias de ARCA.<br>
+      La información tiene carácter orientativo y no reemplaza el análisis del caso concreto ni la consulta al organismo.<br>
+      Para cancelar la suscripción o actualizar preferencias, respondé este correo.
+    </div>
+    <div class="footer-verse">"La justicia es dar a cada uno lo suyo." — Santo Tomás de Aquino</div>
+  </div>
+
+</div>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Iustitia.ar — Newsletter Jurídico · Edición de prueba · 29 de junio de 2026</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; background: #F0EBE0; color: #1A1008; }
+  .wrapper { max-width: 680px; margin: 0 auto; background: #FAF7F2; }
+  .header { background: #2C1A0E; padding: 28px 36px 22px; }
+  .header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .brand { font-family: Georgia, serif; font-size: 22px; font-weight: bold; color: #FAF7F2; letter-spacing: 0.03em; }
+  .brand span { color: #D4A843; }
+  .edition-badge { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.16em; text-transform: uppercase; background: rgba(212,168,67,0.15); border: 1px solid rgba(212,168,67,0.35); color: #D4A843; padding: 4px 10px; border-radius: 3px; }
+  .header-divider { height: 1px; background: rgba(212,168,67,0.2); margin: 14px 0; }
+  .header-meta { font-family: Arial, sans-serif; font-size: 11px; color: rgba(250,247,242,0.45); letter-spacing: 0.06em; }
+  .test-strip { background: #8B1A1A; padding: 7px 36px; font-family: Arial, sans-serif; font-size: 10px; color: #FAF7F2; letter-spacing: 0.05em; text-align: center; }
+  .index-bar { background: #3D2410; padding: 14px 36px; border-bottom: 2px solid #D4A843; }
+  .index-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(212,168,67,0.6); margin-bottom: 8px; }
+  .index-items { display: flex; flex-wrap: wrap; gap: 6px; }
+  .index-item { font-family: Arial, sans-serif; font-size: 10px; color: rgba(250,247,242,0.6); padding: 3px 8px; border: 1px solid rgba(212,168,67,0.18); border-radius: 3px; }
+  .body { padding: 0 36px 36px; }
+  .section-head { margin-top: 32px; margin-bottom: 18px; padding-bottom: 10px; border-bottom: 2px solid #2C1A0E; display: flex; align-items: baseline; gap: 10px; }
+  .section-num { font-family: Georgia, serif; font-size: 28px; font-weight: bold; color: #D4A843; line-height: 1; }
+  .section-title { font-family: Georgia, serif; font-size: 16px; font-weight: bold; color: #2C1A0E; }
+  .section-sub { font-family: Arial, sans-serif; font-size: 11px; color: #8A8070; margin-top: -10px; margin-bottom: 16px; font-style: italic; }
+  .item { margin-bottom: 24px; border: 1px solid #E0D8C8; border-radius: 6px; overflow: hidden; }
+  .item-head { padding: 12px 16px 10px; background: #F5F0E8; border-bottom: 1px solid #E0D8C8; }
+  .item-badges { display: flex; gap: 5px; margin-bottom: 6px; flex-wrap: wrap; }
+  .badge { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 7px; border-radius: 2px; }
+  .badge-norm { background: #2C1A0E; color: #D4A843; }
+  .badge-fallo { background: #5C1A1A; color: #FAD0A0; }
+  .badge-urgente { background: #8B1A1A; color: #FAF7F2; }
+  .badge-src { background: #E0D8C8; color: #8A8070; border: 1px solid #D0C8B0; }
+  .item-title { font-family: Georgia, serif; font-size: 14px; font-weight: bold; color: #2C1A0E; line-height: 1.3; }
+  .item-body { padding: 14px 16px; }
+  .item-summary { font-size: 13.5px; line-height: 1.72; color: #2A1A08; margin-bottom: 12px; }
+  .item-summary strong { font-weight: bold; color: #1A1008; }
+  .alert-box { border-left: 3px solid #D4A843; background: #FFFBF0; padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 10px; }
+  .alert-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: #B8902E; margin-bottom: 6px; }
+  .alert-profiles { font-size: 12.5px; line-height: 1.65; color: #4A3010; }
+  .alert-profiles li { margin-left: 16px; margin-bottom: 3px; }
+  .critical-box { border-left: 3px solid #8B1A1A; background: rgba(139,26,26,0.05); padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 10px; }
+  .critical-label { font-family: Arial, sans-serif; font-size: 9px; font-weight: bold; letter-spacing: 0.14em; text-transform: uppercase; color: #8B1A1A; margin-bottom: 6px; }
+  .critical-text { font-size: 12.5px; line-height: 1.65; color: #4A1010; }
+  .empty-box { border: 1.5px dashed #C8B8A0; border-radius: 6px; padding: 16px; text-align: center; background: #F5F0E8; margin-bottom: 24px; }
+  .empty-text { font-family: Arial, sans-serif; font-size: 12px; color: #8A8070; line-height: 1.6; font-style: italic; }
+  .color-notes { background: #F0EBE0; border-radius: 6px; padding: 16px 18px; margin-top: 8px; }
+  .color-note-item { font-family: Arial, sans-serif; font-size: 11.5px; color: #5A4A38; line-height: 1.9; padding-left: 14px; position: relative; }
+  .color-note-item::before { content: '·'; position: absolute; left: 0; color: #D4A843; font-weight: bold; }
+  .item-divider { height: 1px; background: #E0D8C8; margin: 20px 0; }
+  .cta-box { background: #2C1A0E; padding: 20px 24px; border-radius: 6px; margin-top: 30px; text-align: center; }
+  .cta-text { font-family: Georgia, serif; font-size: 14px; color: #FAF7F2; margin-bottom: 12px; line-height: 1.55; }
+  .cta-btn { display: inline-block; background: #D4A843; color: #2C1A0E; font-family: Arial, sans-serif; font-size: 11px; font-weight: bold; letter-spacing: 0.08em; padding: 9px 22px; border-radius: 4px; text-decoration: none; }
+  .footer { background: #2C1A0E; padding: 20px 36px; border-top: 1px solid rgba(212,168,67,0.15); }
+  .footer-brand { font-family: Georgia, serif; font-size: 13px; color: rgba(250,247,242,0.6); margin-bottom: 6px; }
+  .footer-brand span { color: #D4A843; }
+  .footer-text { font-family: Arial, sans-serif; font-size: 10px; color: rgba(250,247,242,0.3); line-height: 1.7; }
+  .footer-verse { font-family: Georgia, serif; font-style: italic; font-size: 10px; color: rgba(212,168,67,0.25); margin-top: 10px; }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">Iustitia<span>.ar</span></div>
+      <div class="edition-badge">Edición Jurídica</div>
+    </div>
+    <div class="header-divider"></div>
+    <div class="header-meta">Semana del 23 al 29 de junio de 2026 &nbsp;·&nbsp; Edición de prueba &nbsp;·&nbsp; Para abogados y asesores jurídicos</div>
+  </div>
+
+  <div class="index-bar">
+    <div class="index-label">En este número</div>
+    <div class="index-items">
+      <span class="index-item">Feria judicial CSJN · 20 al 31 de julio</span>
+      <span class="index-item">Lineamientos CSJN para sentencias en lenguaje claro</span>
+      <span class="index-item">Notas de color</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- SECCIÓN I -->
+    <div class="section-head">
+      <div class="section-num">I</div>
+      <div class="section-title">Jurisprudencia relevante de la semana</div>
+    </div>
+
+    <div class="empty-box">
+      <div class="empty-text">
+        No se identificaron esta semana fallos de instancias nacionales o federales con impacto directo y verificable de prioridad alta. Se prioriza la precisión sobre el volumen — preferimos no incluir contenido no confirmado en fuente primaria.
+      </div>
+    </div>
+
+    <div class="item-divider"></div>
+
+    <!-- SECCIÓN II -->
+    <div class="section-head">
+      <div class="section-num">II</div>
+      <div class="section-title">Jurisprudencia con votos relevantes</div>
+    </div>
+    <div class="section-sub">Disidencias y posiciones doctrinarias que pueden anticipar líneas argumentales futuras</div>
+
+    <div class="item">
+      <div class="item-head">
+        <div class="item-badges">
+          <span class="badge badge-fallo">Voto en disidencia</span>
+          <span class="badge badge-src">CSJN · Acordada sobre redacción de sentencias · 2026</span>
+        </div>
+        <div class="item-title">Disidencia del juez Lorenzetti sobre los nuevos lineamientos de redacción de sentencias en lenguaje claro</div>
+      </div>
+      <div class="item-body">
+        <div class="item-summary">
+          En el marco de la resolución que aprobó lineamientos para sentencias más claras, el ministro <strong>Ricardo Lorenzetti</strong> emitió un voto en disidencia calificando la propuesta de "limitadísima" y meramente declarativa. Sostuvo que el lenguaje claro es una política de Estado impulsada en Argentina desde hace veinte años, con antecedentes en las justicias provinciales, nacional y federal desde la Primera Conferencia Nacional de Jueces de 2006, y cuestionó que la iniciativa de la mayoría no avance con suficiente profundidad sobre un debate ya consolidado en el Poder Judicial.
+        </div>
+        <div class="alert-box">
+          <div class="alert-label">Utilidad práctica para el estudio</div>
+          <ul class="alert-profiles">
+            <li>Argumento de <strong>autoridad y antecedentes</strong> disponible para escritos que invoquen el derecho a comprender las sentencias judiciales (consumidores, previsional, amparos)</li>
+            <li>Útil como cita doctrinaria en planteos de nulidad por falta de claridad o fundamentación de sentencias de instancias inferiores</li>
+            <li>Línea argumental aprovechable en capacitaciones internas sobre redacción de escritos para magistrados</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="item-divider"></div>
+
+    <!-- NOTAS DE COLOR -->
+    <div class="section-head">
+      <div class="section-num">III</div>
+      <div class="section-title">Notas de color</div>
+    </div>
+    <div class="section-sub">Información institucional sin impacto operativo directo — para estar al tanto, no para actuar</div>
+
+    <div class="color-notes">
+      <div class="color-note-item">La CSJN dispuso, mediante <strong>Acordada 11/2026</strong>, feria judicial para tribunales federales y nacionales de CABA del 20 al 31 de julio de 2026. Las Cámaras Federales del interior deberán fijar su propio receso de 10 días hábiles coincidente con las vacaciones escolares de cada provincia.</div>
+      <div class="color-note-item">Por <strong>Acordada 14/2026</strong>, la Corte designó a Horacio Rosatti como juez de feria del 20 al 25 de julio y a Carlos Rosenkrantz del 26 al 31. Como secretarios de feria actuarán Fernando Arnedo y Diego Seitún. Atención al público durante la feria: lunes a viernes de 7:30 a 13:30 hs.</div>
+      <div class="color-note-item">La Corte conmemoró el aniversario de la Secretaría de Jurisprudencia con un acto en el Palacio de Justicia.</div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-box">
+      <div class="cta-text">
+        ¿Necesitás el encuadre completo de algún caso para un cliente específico?<br>Consultá en la plataforma — respuesta el mismo día.
+      </div>
+      <a href="https://iustitia.ar" class="cta-btn">Ir a Iustitia.ar →</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <div class="footer-brand">Iustitia<span>.ar</span> — Edición Jurídica Semanal</div>
+    <div class="footer-text">
+      Edición de prueba generada el 29/06/2026 con información verificada en Boletín Oficial, CSJN y fuentes primarias.<br>
+      La información tiene carácter orientativo y no reemplaza el análisis del caso concreto.<br>
+      Para cancelar la suscripción o actualizar preferencias, respondé este correo.
+    </div>
+    <div class="footer-verse">"La justicia es dar a cada uno lo suyo." — Santo Tomás de Aquino</div>
+  </div>
+
+</div>
+</body>
+</html>
+
+# Paquete de referencia — Newsletter semanal Iustitia.ar
+
+Este paquete contiene todo lo necesario para que la rutina semanal en Claude Code Remote genere las dos ediciones del newsletter (Jurídica y Contable) con el formato y criterio correctos, sin tener que adivinar nada en cada corrida.
+
+## Contenido
+
+- **CRITERIO-EDITORIAL.md** — las reglas completas de selección, prioridad, estructura y tono. Es la referencia obligatoria de cómo armar cada edición.
+- **newsletter-juridico-template.html** — plantilla de formato exacto para la Edición Jurídica (paleta pergamino/dorado).
+- **newsletter-contable-template.html** — plantilla de formato exacto para la Edición Contable (paleta verde/menta).
+
+## Cómo usarlo en Code Remote
+
+1. Subí estos tres archivos al repositorio o entorno conectado a la rutina "Weekly Iustitia.ar newsletter" (en la sección "Seleccionar un repositorio" del formulario de la rutina).
+
+2. Actualizá el campo de Instrucciones de la rutina para que incluya esta referencia explícita:
+
+   > "Antes de redactar, leé CRITERIO-EDITORIAL.md y seguilo estrictamente. Usá newsletter-juridico-template.html y newsletter-contable-template.html como plantilla exacta de formato — el resultado final debe ser HTML completo en esa misma estructura visual, no markdown plano. Reemplazá el contenido de ejemplo por las novedades reales de la semana en curso, manteniendo la misma estructura de secciones, badges y cajas."
+
+3. Verificá que el conector tenga acceso de lectura a esos archivos en cada ejecución.
+
+4. Corré una ejecución manual de prueba después de subir los archivos, y revisá que el resultado ya sea HTML con el formato correcto antes de dejar que corra en automático el domingo.
+
+## Qué cambió respecto a la primera prueba
+
+La primera ejecución (30/06/2026) no tenía estos archivos conectados — la sesión partió de cero y generó buen contenido jurídico pero en markdown plano, sin el formato HTML ni la capa de "clientes que se benefician" desarrollada como corresponde. Este paquete resuelve exactamente eso.
+
+# Iustitia.ar — Criterio editorial del newsletter semanal
+
+Este documento define cómo se arma cada edición del newsletter de Iustitia.ar. Es la referencia obligatoria para cada corrida de la rutina — no es un lineamiento general, son reglas concretas a aplicar siempre.
+
+Hay dos ediciones separadas cada semana: **Edición Jurídica** (para abogados) y **Edición Contable** (para contadores y asesores impositivos). Comparten formato y criterio, pero el contenido es exclusivo de cada una — no se duplican ítems entre ediciones.
+
+---
+
+## 1. Principio rector: nunca inventar para llenar espacio
+
+Esta es la regla más importante de todas, por encima de cualquier otra.
+
+Si en una semana no hay suficiente material verificable de prioridad alta, **se deja la sección vacía con una nota explícita**, en vez de incluir contenido aproximado, no confirmado o inventado. Es preferible una edición corta y 100% verificada que una completa con dudas.
+
+Cuando algo no se pudo confirmar con certeza (fecha exacta, texto completo de un voto, si una resolución ya salió o está en trámite), **decirlo explícitamente** en el ítem o en una nota metodológica al final — nunca asumir ni completar el vacío con una suposición presentada como hecho.
+
+Si se identifica un falso positivo durante la investigación (una noticia vieja reflotada, una resolución derogada que aparece en buscadores como vigente, etc.), **descartarlo activamente** y, si es relevante, mencionarlo en la nota metodológica como algo que se evaluó y se excluyó.
+
+---
+
+## 2. Categorías de prioridad
+
+### Prioridad alta — siempre se incluye si existe
+- Normas con fecha límite de cumplimiento próxima (30-60 días)
+- Fallos que cambian o consolidan un criterio jurisprudencial con **aplicación inmediata a casos en curso**
+- Cualquier novedad donde la inacción genere perjuicio concreto al cliente (pérdida de plazo, multa, exposición a reclamo)
+
+**Criterio de filtro:** la pregunta que define si algo es prioridad alta no es "¿es importante o noticioso?" sino **"¿hay algo concreto que un cliente del estudio debería hacer o saber por esto?"**. Una causa de alta sensibilidad institucional o mediática (por ejemplo, un planteo recusatorio en una causa de figura pública) NO es prioridad alta si no genera ninguna acción posible para un cliente típico del estudio — va como nota de color, no como ítem principal, sin importar cuánta repercusión tenga en medios.
+
+### Prioridad media — se incluye como "Jurisprudencia con votos relevantes" o "Novedades y análisis"
+- Votos en disidencia con argumentación sólida, identificados explícitamente como tales — útiles porque un abogado puede usarlos como base argumental para un caso futuro o una apelación
+- Fallos que **reafirman jurisprudencia ya consolidada** (no son novedad, pero dan certeza de que el criterio sigue firme y citable) — ejemplo: una Cámara que vuelve a aplicar la doctrina de "Halabi" en una acción colectiva
+- Normativa de alcance sectorial específico, si es relevante para el tipo de cliente del estudio
+
+### Notas de color — sección final, formato breve
+- Noticias institucionales sin impacto operativo directo: nombramientos, ferias judiciales, acordadas administrativas, actos protocolares, comunicados
+- Formato: una línea por ítem, sin desarrollo extenso — para que el lector esté al tanto sin que compita en jerarquía visual con el contenido accionable
+- Estas notas NUNCA deben mezclarse con prioridad alta, aunque tengan repercusión mediática alta (ver ejemplo del criterio de filtro arriba)
+
+---
+
+## 3. Estructura obligatoria de cada ítem de prioridad alta o media
+
+Todo ítem que no sea nota de color debe tener estos componentes, en este orden:
+
+1. **Título** que indique con precisión sobre qué versa (norma, fallo o instituto), no un titular genérico
+2. **Badges de identificación:** tipo (Ley/Decreto/Fallo/Voto en disidencia/etc.), fuente (tribunal, organismo, número de RG), fecha o período
+3. **Resumen** de 2-4 oraciones: qué dice la norma o el fallo, en lenguaje claro pero técnicamente preciso. Citar artículos, números de ley/RG, tribunal y fecha siempre que estén disponibles
+4. **Caja "Clientes que se benefician / deben actuar"** — este es el componente más importante y el que más valor agrega. Debe bajar a perfiles concretos de cliente, no quedarse en lo genérico. Mal ejemplo: "puede ser relevante para algunos clientes". Buen ejemplo: "Trabajadores con sentencias laborales firmes pendientes de ejecución a quienes se les ofreció el pago en cuotas"
+5. **Caja "Fecha límite"** (solo si aplica) — destacada visualmente, con la fecha exacta y, si es posible, los días u horas hábiles restantes
+6. **Nota de advertencia** (solo si corresponde) — cuando el criterio no está consolidado, es de primera instancia, o hay riesgo de que cambie
+
+---
+
+## 4. Formato visual — usar siempre las plantillas adjuntas
+
+Cada edición se entrega como archivo HTML completo, listo para pegar en Mailchimp o Brevo, siguiendo exactamente la estructura visual de las plantillas de referencia adjuntas a este paquete:
+
+- `newsletter-juridico-template.html` — paleta pergamino oscuro (#2C1A0E) y dorado (#D4A843), para la Edición Jurídica
+- `newsletter-contable-template.html` — paleta verde azulado oscuro (#0F2E2E) y menta (#4ABFA8), para la Edición Contable
+
+**No generar markdown plano.** El resultado final siempre debe ser el archivo HTML completo, manteniendo la misma estructura de secciones, badges, cajas de alerta y pie de página que las plantillas. Usar el contenido de las plantillas como ejemplo de tono, nivel de detalle y formato exacto de cada componente — no solo como referencia de colores.
+
+Mantener siempre:
+- El header con marca "Iustitia.ar" y el badge de edición (Jurídica / Contable)
+- La barra de índice ("En este número") con los temas de la semana
+- Las secciones numeradas en romano (I, II, III)
+- El CTA final invitando a consultar en la plataforma
+- El footer con la cita de Santo Tomás de Aquino y el texto legal de distribución reservada
+
+---
+
+## 5. Tono y estilo de redacción
+
+- Español argentino, técnico pero claro — está dirigido a profesionales, no hay que sobre-explicar conceptos básicos del derecho o la contabilidad
+- Preciso en las citas: número de ley/decreto/RG, artículo, tribunal, sala, fecha — siempre que la fuente lo permita
+- Sobrio, sin sensacionalismo ni urgencia artificial — la urgencia debe venir de hechos reales (plazos, vigencias), no del tono de la escritura
+- Nunca usar el newsletter para promover contenido ajeno al criterio editorial (no es un espacio de opinión política o institucional)
+
+---
+
+## 6. Fuentes a consultar
+
+Priorizar siempre fuentes primarias sobre secundarias:
+
+**Primarias:** Boletín Oficial, InfoLEG, SAIJ, sitio de la CSJN (fallos y acordadas), CIJ (Centro de Información Judicial), sitio de ARCA/AFIP, Sistema de Información Parlamentaria (Senado/Diputados)
+
+**Secundarias (para contexto y verificación cruzada, no como única fuente de un dato crítico):** Errepar, Microjuris, iProfesional, El Cronista, La Nación, Infobae — usar para confirmar interpretación o impacto práctico, no como fuente única de la existencia de una norma o fallo
+
+Cuando una norma o fallo solo aparece en fuente secundaria sin poder confirmarse en la fuente primaria correspondiente, marcarlo explícitamente con una nota de "pendiente de verificación en fuente oficial".
+
+---
+
+## 7. Notificación al finalizar
+
+Al completar ambas ediciones, enviar notificación push/email con un resumen breve (3-5 líneas) indicando:
+- Qué encabeza cada edición (el ítem más relevante)
+- Si hubo alguna semana floja en prioridad alta y cómo se manejó
+- Cualquier dato que requiera confirmación manual antes de publicar
+
+Los dos archivos HTML finales deben quedar disponibles en la sesión con nombres claros: `Iustitia-Legal-[fecha].html` y `Iustitia-Contable-[fecha].html`.
