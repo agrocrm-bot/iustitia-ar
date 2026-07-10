@@ -1076,21 +1076,76 @@ footer a:hover { opacity: 1; }
 </section>
 
 <script>
-function subscribeNewsletter(e, edition) {
+async function subscribeNewsletter(e, edition) {
   e.preventDefault();
   const form = e.target;
+  const inputs = form.querySelectorAll('input');
+  const nombre = inputs[0].value.trim();
+  const matricula = inputs[1].value.trim();
+  const email = inputs[2].value.trim();
   const btn = form.querySelector('button');
   const originalText = btn.textContent;
-  btn.textContent = '¡Listo! Te escribimos pronto';
-  btn.style.background = '#8FBF6F';
+
+  // Lista IDs: 3 = Jurídica, 4 = Contable
+  const listId = edition === 'legal' ? 3 : 4;
+  const editionLabel = edition === 'legal' ? 'Edición Jurídica' : 'Edición Contable';
+
+  btn.textContent = 'Registrando...';
   btn.disabled = true;
-  // En producción: enviar a Mailchimp/Brevo vía API o webhook aquí
-  setTimeout(() => {
-    form.reset();
-    btn.textContent = originalText;
-    btn.style.background = '#D4A843';
+  btn.style.background = '#8A8070';
+
+  try {
+    const resp = await fetch('https://api.brevo.com/v3/contacts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'api-key': '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'
+      },
+      body: JSON.stringify({
+        email: email,
+        attributes: {
+          FIRSTNAME: nombre.split(' ')[0] || nombre,
+          LASTNAME: nombre.split(' ').slice(1).join(' ') || '',
+          MATRICULA: matricula || ''
+        },
+        listIds: [listId],
+        updateEnabled: true
+      })
+    });
+
+    if (resp.ok || resp.status === 204) {
+      btn.textContent = '✓ ¡Suscripto correctamente!';
+      btn.style.background = '#4A8A4A';
+      form.reset();
+      setTimeout(() => {
+        btn.textContent = originalText;
+        btn.style.background = '#D4A843';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      const data = await resp.json();
+      // Contact already exists — still a success
+      if (data.code === 'duplicate_parameter') {
+        btn.textContent = '✓ Ya estás registrado';
+        btn.style.background = '#4A8A4A';
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.style.background = '#D4A843';
+          btn.disabled = false;
+        }, 3500);
+      } else {
+        throw new Error(data.message || 'Error');
+      }
+    }
+  } catch (err) {
+    btn.textContent = 'Error — intentá de nuevo';
+    btn.style.background = '#8B1A1A';
     btn.disabled = false;
-  }, 3500);
+    setTimeout(() => {
+      btn.textContent = originalText;
+      btn.style.background = '#D4A843';
+    }, 3000);
+  }
   return false;
 }
 </script>
